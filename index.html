@@ -99,6 +99,17 @@
             background: linear-gradient(90deg, transparent, #9cff93, transparent);
             width: 100%;
         }
+        #lightbox-img-wrapper {
+            transform: scale(0.9);
+            opacity: 0;
+        }
+        .carousel-img {
+            transform: scale(1.02);
+            transition: transform 0.7s ease-out, opacity 0.5s ease-out !important;
+        }
+        .carousel-img:hover {
+            transform: scale(1.05);
+        }
     </style>
 </head>
 <body class="bg-background text-on-surface font-body selection:bg-primary selection:text-on-primary">
@@ -245,19 +256,32 @@
 <div class="text-[#adaaaa]">© 2024 AI Product Manager &amp; Fitness Enthusiast. 保持进取。</div>
 </div>
 </div>
-<div id="lightbox" class="fixed inset-0 bg-black/95 z-[100] hidden flex items-center justify-center" onclick="closeLightbox()">
-<button onclick="event.stopPropagation(); lightboxPrev()" class="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors">
+<div id="lightbox" class="fixed inset-0 bg-black/95 z-[100] hidden items-center justify-center opacity-0 transition-opacity duration-300" onclick="closeLightbox()">
+<div class="absolute inset-0 flex items-center justify-center p-8" onclick="event.stopPropagation()">
+<div id="lightbox-img-wrapper" class="relative max-w-[90vw] max-h-[90vh] transition-all duration-500 ease-out">
+<img id="lightbox-img" class="max-w-[90vw] max-h-[90vh] object-contain rounded-lg shadow-2xl" src="" alt=""/>
+<div id="lightbox-zoom-indicator" class="absolute inset-0 border-2 border-white/0 rounded-lg transition-all duration-300 pointer-events-none"></div>
+</div>
+</div>
+<button onclick="event.stopPropagation(); lightboxPrev()" class="absolute left-4 top-1/2 -translate-y-1/2 w-14 h-14 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-sm flex items-center justify-center text-white transition-all duration-300 hover:scale-110 hover:bg-white/30">
 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
 </button>
-<img id="lightbox-img" class="max-w-[90vw] max-h-[90vh] object-contain" src="" alt=""/>
-<button onclick="event.stopPropagation(); lightboxNext()" class="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors">
+<button onclick="event.stopPropagation(); lightboxNext()" class="absolute right-4 top-1/2 -translate-y-1/2 w-14 h-14 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-sm flex items-center justify-center text-white transition-all duration-300 hover:scale-110 hover:bg-white/30">
 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
 </button>
-<button onclick="closeLightbox()" class="absolute top-4 right-4 w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors">
+<button onclick="closeLightbox()" class="absolute top-4 right-4 w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-sm flex items-center justify-center text-white transition-all duration-300 hover:scale-110">
 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
 </button>
-<div class="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
-<span id="lightbox-counter" class="text-white/60 text-sm">1 / 7</span>
+<div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4">
+<div id="lightbox-progress" class="w-48 h-1 bg-white/20 rounded-full overflow-hidden">
+<div class="h-full bg-[#9cff93] rounded-full transition-all duration-500 ease-out" style="width: 14.28%"></div>
+</div>
+<div class="flex items-center gap-6">
+<span id="lightbox-counter" class="text-white/60 text-sm font-medium">1 / 7</span>
+<div class="flex gap-2">
+<span id="lightbox-hint" class="text-white/30 text-xs">使用 ← → 键切换</span>
+</div>
+</div>
 </div>
 </div>
 </footer>
@@ -290,9 +314,47 @@ function openLightbox(index) {
     currentSlide = index;
     lightboxImg.src = carouselImg[index].src;
     lightboxCounter.textContent = (index + 1) + ' / ' + totalSlides;
+    updateLightboxProgress();
     lightbox.classList.remove('hidden');
-    lightbox.classList.add('flex');
+    setTimeout(() => {
+        lightbox.classList.remove('opacity-0');
+        lightbox.classList.add('opacity-100');
+    }, 10);
     document.body.style.overflow = 'hidden';
+    animateLightboxImage();
+}
+
+function updateLightboxProgress() {
+    const progress = ((currentSlide + 1) / totalSlides) * 100;
+    const progressBar = document.querySelector('#lightbox-progress > div');
+    if (progressBar) {
+        progressBar.style.width = progress + '%';
+    }
+}
+
+function animateLightboxImage() {
+    const wrapper = document.getElementById('lightbox-img-wrapper');
+    const indicator = document.getElementById('lightbox-zoom-indicator');
+    wrapper.style.transform = 'scale(0.9)';
+    wrapper.style.opacity = '0';
+    indicator.style.borderColor = 'rgba(255,255,255,0.5)';
+    setTimeout(() => {
+        wrapper.style.transform = 'scale(1)';
+        wrapper.style.opacity = '1';
+        setTimeout(() => {
+            indicator.style.borderColor = 'rgba(255,255,255,0)';
+        }, 300);
+    }, 100);
+}
+
+function closeLightbox() {
+    lightbox.classList.remove('opacity-100');
+    lightbox.classList.add('opacity-0');
+    setTimeout(() => {
+        lightbox.classList.add('hidden');
+        lightbox.classList.remove('flex');
+        document.body.style.overflow = '';
+    }, 300);
 }
 
 function openWechatPopup() {
@@ -324,12 +386,24 @@ function lightboxNext() {
     currentSlide = (currentSlide + 1) % totalSlides;
     lightboxImg.src = carouselImg[currentSlide].src;
     lightboxCounter.textContent = (currentSlide + 1) + ' / ' + totalSlides;
+    updateLightboxProgress();
+    animateLightboxImage();
 }
 function lightboxPrev() {
     currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
     lightboxImg.src = carouselImg[currentSlide].src;
     lightboxCounter.textContent = (currentSlide + 1) + ' / ' + totalSlides;
+    updateLightboxProgress();
+    animateLightboxImage();
 }
+
+// Keyboard navigation
+document.addEventListener('keydown', (e) => {
+    if (!lightbox || lightbox.classList.contains('hidden')) return;
+    if (e.key === 'ArrowRight') lightboxNext();
+    if (e.key === 'ArrowLeft') lightboxPrev();
+    if (e.key === 'Escape') closeLightbox();
+});
 
 // Auto play
 let autoPlay = setInterval(nextSlide, 4000);
