@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>智动未来 | AI PM</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "secondary": "#ccdff6",
+                        "on-error": "#450900",
+                        "on-tertiary-fixed-variant": "#005c64",
+                        "on-tertiary-fixed": "#003d42",
+                        "on-surface": "#ffffff",
+                        "on-secondary-fixed": "#2b3d4f",
+                        "primary-fixed-dim": "#00ec3b",
+                        "on-tertiary-container": "#005159",
+                        "on-background": "#ffffff",
+                        "secondary-dim": "#bed1e7",
+                        "error-container": "#b92902",
+                        "surface-container-high": "#20201f",
+                        "error": "#ff7351",
+                        "surface-dim": "#0e0e0e",
+                        "inverse-surface": "#fcf9f8",
+                        "surface-variant": "#262626",
+                        "on-primary": "#006413",
+                        "surface": "#0e0e0e",
+                        "tertiary-fixed": "#0eeafd",
+                        "surface-bright": "#2c2c2c",
+                        "surface-tint": "#9cff93",
+                        "on-surface-variant": "#adaaaa",
+                        "primary-container": "#00fc40",
+                        "primary": "#9cff93",
+                        "surface-container-highest": "#262626",
+                        "on-primary-container": "#005a10",
+                        "inverse-on-surface": "#565555",
+                        "on-primary-fixed-variant": "#006513",
+                        "on-error-container": "#ffd2c8",
+                        "primary-dim": "#00ec3b",
+                        "on-primary-fixed": "#00440a",
+                        "surface-container-lowest": "#000000",
+                        "tertiary-fixed-dim": "#00dbec",
+                        "tertiary-dim": "#00dbec",
+                        "surface-container": "#1a1a1a",
+                        "surface-container-low": "#131313",
+                        "background": "#0e0e0e",
+                        "on-tertiary": "#005b63",
+                        "error-dim": "#d53d18",
+                        "secondary-fixed": "#ccdff6",
+                        "primary-fixed": "#00fc40",
+                        "on-secondary-fixed-variant": "#485a6d",
+                        "inverse-primary": "#006f16",
+                        "secondary-container": "#36485b",
+                        "tertiary": "#8af2ff",
+                        "on-secondary": "#3e5063",
+                        "tertiary-container": "#0eeafd",
+                        "secondary-fixed-dim": "#bed1e7",
+                        "outline": "#767575",
+                        "on-secondary-container": "#bfd2e9",
+                        "outline-variant": "#484847"
+                    },
+                    fontFamily: {
+                        "headline": ["Space Grotesk"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-auto-rows: 240px;
+            gap: 1.5rem;
+        }
+        .glass-card {
+            background: rgba(38, 38, 38, 0.4);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(156, 255, 147, 0.1);
+        }
+        .ghost-border {
+            border: 1px solid rgba(72, 72, 71, 0.2);
+        }
+        .scanline {
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #9cff93, transparent);
+            width: 100%;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body selection:bg-primary selection:text-on-primary">
+<nav class="fixed top-0 w-full z-50 bg-[#0e0e0e]/80 backdrop-blur-md border-b border-[#262626]/20">
+<div class="flex justify-between items-center px-8 py-4 max-w-7xl mx-auto font-['Space_Grotesk'] tracking-tight">
+<div class="text-xl font-bold tracking-tighter text-[#9cff93]">智动未来 | AI PM</div>
+<div class="hidden md:flex space-x-8">
+<a class="text-[#9cff93] border-b-2 border-[#9cff93] pb-1 hover:text-[#9cff93] transition-colors duration-300" href="#">首页</a>
+<a class="text-[#adaaaa] hover:text-[#9cff93] transition-colors duration-300" href="#">作品集</a>
+<a class="text-[#adaaaa] hover:text-[#9cff93] transition-colors duration-300" href="#">方法论</a>
+<a class="text-[#adaaaa] hover:text-[#9cff93] transition-colors duration-300" href="#">关于我</a>
+</div>
+<button class="bg-primary text-on-primary px-6 py-2 rounded-xl font-bold scale-95 active:scale-90 transition-transform">联系我</button>
+</div>
+</nav>
+<main class="max-w-7xl mx-auto pt-32 pb-20 px-8">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-6 auto-rows-[240px]">
+<div class="md:col-span-3 md:row-span-2 bg-surface-container-low rounded-xl p-12 flex flex-col justify-center relative overflow-hidden group">
+<div class="absolute inset-0 opacity-5 pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]"></div>
+<div class="relative z-10">
+<span class="inline-block px-3 py-1 mb-6 rounded-full bg-secondary-container text-on-secondary-container text-[10px] tracking-widest font-label font-bold uppercase">System Active v2.4</span>
+<h1 class="text-6xl md:text-8xl font-headline font-bold leading-tight tracking-tighter mb-8">
+                        数据驱动<span class="text-primary italic">身体</span><br/>
+                        AI 赋能<span class="text-primary">大脑</span>
+</h1>
+<p class="text-on-surface-variant text-xl max-w-xl leading-relaxed">
+                        作为一名深耕 AI 领域的产品经理与健身狂热者，我致力于将算法的精确性与人类生理的极限潜能相结合。
+                    </p>
+</div>
+<div class="absolute bottom-0 right-0 p-8 opacity-20 group-hover:opacity-100 transition-opacity duration-500">
+<span class="material-symbols-outlined text-9xl text-primary" data-icon="neurology">neurology</span>
+</div>
+</div>
+<div class="md:col-span-1 md:row-span-2 bg-surface-container-highest rounded-xl p-8 flex flex-col justify-between border border-outline-variant/10 group cursor-pointer overflow-hidden">
+<div class="relative">
+<div class="flex justify-between items-start mb-4">
+<span class="material-symbols-outlined text-primary text-4xl" data-icon="picture_as_pdf">picture_as_pdf</span>
+<span class="text-[10px] text-on-surface-variant font-label uppercase tracking-widest">Featured Project</span>
+</div>
+<h3 class="text-3xl font-headline font-bold text-white mb-2 leading-tight">Zero-G 作品集</h3>
+<p class="text-on-surface-variant text-sm">重新定义未来健身体验的交互系统原型。</p>
+</div>
+<div class="h-48 w-full mt-4 bg-surface-container-low rounded-lg relative overflow-hidden">
+<img class="w-full h-full object-cover grayscale opacity-50 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700" data-alt="abstract high-tech gym interior with neon emerald lighting and futuristic fitness equipment" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAJH4a8kFGDwKuI2oshvkE3nb7crsdmmYnr1-blSkrp98P8k5WAKOQ5lGi6SdLfWzzCUwZj4v4oxN2RkbaxJUG1tFkNLxqaS1fLfd_SdYyWd6PjU7Y98oBJj7nkVK3g5LZqn48Bjy9Du7zkITjqBK91qphNSbsvI9tp8GXZFbsWNGdu894s4RMAfiLE7dLhWlGQdkILJAnWFkq3Kz3C0m79tgduGk6qORAtji_4r7Na8-T9paKfdS9ptJ7rIfXbqiyDCYj9aG5EFZFN"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black to-transparent"></div>
+<div class="absolute bottom-4 left-4 flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-primary animate-pulse"></div>
+<span class="text-[10px] text-primary font-bold uppercase">View PDF Case Study</span>
+</div>
+</div>
+</div>
+<div class="md:col-span-2 md:row-span-1 bg-surface-container-low rounded-xl p-8 flex flex-col justify-center gap-6 relative overflow-hidden">
+<div class="flex justify-between items-center">
+<span class="text-sm font-label text-on-surface-variant tracking-wider uppercase">Social Pulse</span>
+<div class="flex gap-2">
+<div class="w-1.5 h-1.5 rounded-full bg-primary"></div>
+<div class="w-1.5 h-1.5 rounded-full bg-outline-variant"></div>
+</div>
+</div>
+<div class="flex flex-wrap gap-4">
+<a class="flex items-center gap-3 bg-surface-container-highest px-6 py-4 rounded-xl ghost-border hover:bg-surface-variant transition-all group" href="#">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary" data-icon="music_video">music_video</span>
+<span class="font-medium text-sm">抖音</span>
+</a>
+<a class="flex items-center gap-3 bg-surface-container-highest px-6 py-4 rounded-xl ghost-border hover:bg-surface-variant transition-all group" href="#">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary" data-icon="code">code</span>
+<span class="font-medium text-sm">GitHub</span>
+</a>
+<a class="flex items-center gap-3 bg-surface-container-highest px-6 py-4 rounded-xl ghost-border hover:bg-surface-variant transition-all group" href="#">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary" data-icon="article">article</span>
+<span class="font-medium text-sm">人人都是产品经理</span>
+</a>
+</div>
+<div class="scanline absolute bottom-0 left-0 opacity-10"></div>
+</div>
+<div class="md:col-span-2 md:row-span-1 bg-primary text-on-primary rounded-xl p-8 flex flex-col justify-between group relative overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-br from-primary via-primary to-primary-container opacity-90 transition-transform group-hover:scale-105 duration-700"></div>
+<div class="relative z-10">
+<h4 class="text-xl font-bold font-headline mb-1">即刻联络</h4>
+<p class="text-on-primary/80 text-sm">构建下一个改变范式的 AI 硬件或软件。</p>
+</div>
+<div class="relative z-10 flex flex-col md:flex-row gap-4">
+<div class="flex items-center gap-4 bg-on-primary/10 backdrop-blur-sm px-6 py-4 rounded-xl flex-1 group/item transition-all cursor-pointer">
+<span class="material-symbols-outlined" data-icon="mail">mail</span>
+<span class="font-bold">hello@aipm.tech</span>
+</div>
+<div class="flex items-center gap-4 bg-on-primary/10 backdrop-blur-sm px-6 py-4 rounded-xl group/wechat relative cursor-pointer">
+<span class="material-symbols-outlined" data-icon="chat_bubble">chat_bubble</span>
+<span class="font-bold">WeChat</span>
+<div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-4 p-4 bg-white rounded-xl shadow-2xl opacity-0 invisible group-hover/wechat:opacity-100 group-hover/wechat:visible transition-all duration-300">
+<div class="w-32 h-32 bg-slate-100 flex items-center justify-center rounded">
+<img class="w-24 h-24 mix-blend-multiply opacity-80" data-alt="abstract monochromatic QR code on white background with clean sharp edges" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBRspQsXL08YaLd8BZNvcetGfl6fUp38IwTnXDhuwAAGYP1Kupqm-9g3p5dQ1qu4hORM6VAXpRtRwZz96246-6CcaTi6x0AJawK2yTPCZyfW0gR3AWkVL6LBDHWtqVSbsPVh2U8FuMJsAlyQqx8ytLGEhCQr75PA1KNNux6PpAKsuqc5e7ieKS1ddGmzmVqO-nl6DvHggiaL4w3ZhP4kK59G7xCjwqO8-4-tx3_qS9pVceydEMuVjr3_7M4teSQ1zYGFK4y6jsmYWyo"/>
+</div>
+<div class="text-[10px] text-black text-center mt-2 font-bold uppercase tracking-tight">Scan for WeChat</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<section class="mt-24 grid grid-cols-1 md:grid-cols-3 gap-8 items-center border-t border-[#131313] pt-24">
+<div class="md:col-span-1">
+<span class="text-primary text-[10px] font-label font-black tracking-[0.3em] uppercase block mb-4">Core Principles</span>
+<h2 class="text-4xl font-headline font-bold text-white leading-tight">逻辑与感性的<br/>数字契合</h2>
+</div>
+<div class="md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-12">
+<div>
+<div class="w-12 h-1 rounded-full bg-primary mb-6"></div>
+<h5 class="text-lg font-bold mb-3">AI 决策架构</h5>
+<p class="text-on-surface-variant text-sm leading-relaxed">利用 LLM 重塑用户交互路径，不仅是工具，更是认知的延伸。我的方法论专注于如何将复杂的模型输出转化为直观、可感知的用户价值。</p>
+</div>
+<div>
+<div class="w-12 h-1 rounded-full bg-outline-variant mb-6"></div>
+<h5 class="text-lg font-bold mb-3">生物黑客主义</h5>
+<p class="text-on-surface-variant text-sm leading-relaxed">将健身房的严谨训练逻辑引入产品迭代。每一个功能都经过压力测试，每一像素都追求效率。以终为始，不断超越生理与代码的极限。</p>
+</div>
+</div>
+</section>
+</main>
+<footer class="bg-[#0e0e0e] w-full py-12 px-8 border-t border-[#131313]">
+<div class="flex flex-col md:flex-row justify-between items-center gap-6 max-w-7xl mx-auto font-['Inter'] text-sm leading-relaxed">
+<div class="flex flex-col gap-2">
+<div class="text-lg font-black text-[#9cff93]">智动未来</div>
+<div class="text-[#adaaaa]">© 2024 AI Product Manager &amp; Fitness Enthusiast. 保持进取。</div>
+</div>
+<div class="flex gap-8">
+<a class="text-[#adaaaa] hover:text-white transition-colors opacity-80 hover:opacity-100" href="#">领英</a>
+<a class="text-[#adaaaa] hover:text-white transition-colors opacity-80 hover:opacity-100" href="#">GitHub</a>
+<a class="text-[#adaaaa] hover:text-white transition-colors opacity-80 hover:opacity-100" href="#">知乎</a>
+<a class="text-[#adaaaa] hover:text-white transition-colors opacity-80 hover:opacity-100" href="#">训练计划</a>
+<a class="text-[#adaaaa] hover:text-white transition-colors opacity-80 hover:opacity-100" href="#">隐私政策</a>
+</div>
+</div>
+</footer>
+</body></html>
