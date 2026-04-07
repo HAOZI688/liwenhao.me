@@ -275,7 +275,7 @@
 <div id="lightbox" class="fixed inset-0 bg-black/95 z-[100] hidden items-center justify-center opacity-0 transition-opacity duration-300" onclick="closeLightbox()">
 <div class="absolute inset-0 flex items-center justify-center p-8" onclick="event.stopPropagation()">
 <div id="lightbox-img-wrapper" class="relative max-w-[90vw] max-h-[90vh] transition-all duration-500 ease-out">
-<img id="lightbox-img" class="max-w-[90vw] max-h-[90vh] object-contain rounded-lg shadow-2xl" src="" alt="/>
+<img id="lightbox-img" class="max-w-[90vw] max-h-[90vh] object-contain rounded-lg shadow-2xl" src="" alt="Portfolio image"/>
 <div id="lightbox-zoom-indicator" class="absolute inset-0 border-2 border-white/0 rounded-lg transition-all duration-300 pointer-events-none"></div>
 </div>
 </div>
@@ -327,11 +327,14 @@ function nextSlide() { showSlide(currentSlide + 1); }
 function prevSlide() { showSlide(currentSlide - 1); }
 
 function openLightbox(index) {
+    if (!carouselImg[index]) return;
     currentSlide = index;
-    lightboxImg.src = carouselImg[index].src;
+    const imgSrc = carouselImg[index].src;
+    lightboxImg.src = imgSrc;
     lightboxCounter.textContent = (index + 1) + ' / ' + totalSlides;
     updateLightboxProgress();
     lightbox.classList.remove('hidden');
+    lightbox.style.backgroundColor = 'rgba(0,0,0,0.95)';
     setTimeout(() => {
         lightbox.classList.remove('opacity-0');
         lightbox.classList.add('opacity-100');
