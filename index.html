@@ -418,17 +418,24 @@ document.addEventListener('keydown', (e) => {
 // Auto play
 let autoPlay = setInterval(nextSlide, 4000);
 
-// Pause auto play on lightbox open
-function pauseAutoPlay() { clearInterval(autoPlay); }
-
 // Resume auto play when lightbox closes
 const observer = new MutationObserver(() => {
     if (!lightbox.classList.contains('hidden')) {
         clearInterval(autoPlay);
     } else {
+        clearInterval(autoPlay);
         autoPlay = setInterval(nextSlide, 4000);
     }
 });
 observer.observe(lightbox, { attributes: true, attributeFilter: ['class'] });
+
+// Dot click navigation
+carouselDot.forEach((dot, i) => {
+    dot.style.cursor = 'pointer';
+    dot.addEventListener('click', (e) => {
+        e.stopPropagation();
+        showSlide(i);
+    });
+});
 </script>
 </body></html>
