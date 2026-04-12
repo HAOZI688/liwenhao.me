@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html class="dark" lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script>
+    tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "surface-container-high": "#222a3d",
+                "on-primary-fixed-variant": "#2f2ebe",
+                "background": "#0b1326",
+                "on-error-container": "#ffdad6",
+                "on-secondary": "#00344d",
+                "secondary": "#89ceff",
+                "on-tertiary-fixed": "#301400",
+                "surface-container": "#171f33",
+                "on-secondary-container": "#00344e",
+                "tertiary-fixed-dim": "#ffb783",
+                "outline": "#908fa0",
+                "on-tertiary-fixed-variant": "#703700",
+                "surface-bright": "#31394d",
+                "secondary-fixed-dim": "#89ceff",
+                "outline-variant": "#464554",
+                "inverse-on-surface": "#283044",
+                "surface-container-low": "#131b2e",
+                "surface-tint": "#c0c1ff",
+                "on-primary": "#1000a9",
+                "on-tertiary-container": "#452000",
+                "on-tertiary": "#4f2500",
+                "primary-container": "#8083ff",
+                "surface-variant": "#2d3449",
+                "error": "#ffb4ab",
+                "on-background": "#dae2fd",
+                "inverse-surface": "#dae2fd",
+                "tertiary": "#ffb783",
+                "secondary-fixed": "#c9e6ff",
+                "on-surface": "#dae2fd",
+                "on-primary-container": "#0d0096",
+                "on-error": "#690005",
+                "primary-fixed-dim": "#c0c1ff",
+                "error-container": "#93000a",
+                "on-secondary-fixed-variant": "#004c6e",
+                "on-secondary-fixed": "#001e2f",
+                "surface-container-lowest": "#060e20",
+                "primary-fixed": "#e1e0ff",
+                "secondary-container": "#00a2e6",
+                "on-surface-variant": "#c7c4d7",
+                "surface-container-highest": "#2d3449",
+                "inverse-primary": "#494bd6",
+                "tertiary-fixed": "#ffdcc5",
+                "primary": "#c0c1ff",
+                "surface": "#0b1326",
+                "surface-dim": "#0b1326",
+                "tertiary-container": "#d97721",
+                "on-primary-fixed": "#07006c"
+            },
+            "borderRadius": {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "full": "9999px"
+            },
+            "fontFamily": {
+                "headline": ["Inter"],
+                "body": ["Inter"],
+                "label": ["Inter"]
+            }
+          },
+        },
+    }
+</script>
+<style>
+    .glass-panel {
+        background: rgba(45, 52, 73, 0.6);
+        backdrop-filter: blur(24px);
+    }
+    .ai-glow-border {
+        position: relative;
+    }
+    .ai-glow-border::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80%;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, #c0c1ff, transparent);
+        filter: blur(4px);
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+        width: 4px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+        background: #0b1326;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+        background: #2d3449;
+        border-radius: 10px;
+    }
+</style>
+</head>
+<body class="bg-background text-on-background font-body selection:bg-primary selection:text-on-primary">
+<div class="flex min-h-screen">
+<!-- SideNavBar -->
+<aside class="h-screen w-64 left-0 sticky bg-[#131b2e] flex flex-col py-6">
+<div class="px-6 mb-8">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-primary-container flex items-center justify-center shadow-lg">
+<span class="material-symbols-outlined text-on-primary" style="font-variation-settings: 'FILL' 1;">bolt</span>
+</div>
+<div>
+<h2 class="text-on-surface font-bold tracking-tight">Creator Hub</h2>
+<p class="text-[10px] text-primary uppercase tracking-[0.1em] font-semibold">AI Video Studio</p>
+</div>
+</div>
+</div>
+<nav class="flex-1 space-y-1 px-2">
+<div class="text-[#c0c1ff] bg-[#2d3449] rounded-lg mx-2 px-4 py-3 flex items-center gap-3 cursor-pointer" onclick="resetForm()">
+<span class="material-symbols-outlined text-sm">add_circle</span>
+<span class="font-medium text-sm">新工作流</span>
+</div>
+<div class="text-[#dae2fd]/50 px-4 py-3 flex items-center gap-3 hover:bg-[#2d3449]/50 transition-all duration-300 rounded-lg mx-2 cursor-pointer">
+<span class="material-symbols-outlined text-sm">pending_actions</span>
+<span class="font-medium text-sm">活动任务</span>
+</div>
+<div class="text-[#dae2fd]/50 px-4 py-3 flex items-center gap-3 hover:bg-[#2d3449]/50 transition-all duration-300 rounded-lg mx-2 cursor-pointer">
+<span class="material-symbols-outlined text-sm">history</span>
+<span class="font-medium text-sm">历史记录</span>
+</div>
+<div class="text-[#dae2fd]/50 px-4 py-3 flex items-center gap-3 hover:bg-[#2d3449]/50 transition-all duration-300 rounded-lg mx-2 cursor-pointer">
+<span class="material-symbols-outlined text-sm">memory</span>
+<span class="font-medium text-sm">模型</span>
+</div>
+</nav>
+<div class="mt-auto px-4 pb-4">
+<div class="space-y-1">
+<div class="text-[#dae2fd]/50 px-4 py-2 flex items-center gap-3 hover:text-on-surface transition-colors cursor-pointer text-sm">
+<span class="material-symbols-outlined text-sm">help</span>
+<span>支持</span>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 flex flex-col min-w-0 bg-background overflow-y-auto">
+<!-- TopAppBar -->
+<header class="w-full top-0 sticky z-30 bg-[#0b1326] flex justify-between items-center px-8 py-4 h-16">
+<div class="text-xl font-extrabold tracking-tighter text-[#dae2fd] font-headline">NEURAL SLATE</div>
+<div class="hidden md:flex items-center gap-8">
+<a class="text-[#dae2fd]/60 font-medium text-sm hover:text-[#dae2fd] transition-colors" href="#">控制台</a>
+<a class="text-[#c0c1ff] border-b-2 border-[#6366F1] pb-1 font-medium text-sm" href="#">项目</a>
+<a class="text-[#dae2fd]/60 font-medium text-sm hover:text-[#dae2fd] transition-colors" href="#">媒体库</a>
+<a class="text-[#dae2fd]/60 font-medium text-sm hover:text-[#dae2fd] transition-colors" href="#">提示词</a>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative group">
+<span class="material-symbols-outlined text-[#dae2fd]/60 cursor-pointer hover:text-primary transition-colors">notifications</span>
+<div class="absolute top-0 right-0 w-2 h-2 bg-primary rounded-full"></div>
+</div>
+<span class="material-symbols-outlined text-[#dae2fd]/60 cursor-pointer hover:text-primary transition-colors">settings</span>
+<div class="w-8 h-8 rounded-full overflow-hidden border-2 border-surface-container-highest">
+<img alt="User profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDvoPT8jdHBl4P5Cjt67Xr-Njcfp79EX6pO_PlaeHr7vkdMMEFiGVZcldBWxpcbOjoV4IxeZgk0vG2urqRkXuphLCcptEAqGd6pdMGXY0JNpS1zjBO-rRdwfNeYDB4que6IojJyb1YF06NRDNueYuSUfXl8Wu1tFDbvwgutikFoHKNugt9JDyIO-S33D-51E3sTEnKAQ0OPm_Zs1kdcAysRhXm5hQo12tvXj9peZaHGwkDhsTz6zMkb7kwM-cmaotvU3mFHakJqWmbM"/>
+</div>
+</div>
+</header>
+<div class="p-8 max-w-7xl mx-auto w-full space-y-12">
+<!-- Hero Section -->
+<section class="space-y-4">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary-container/10 border border-primary/20">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+<span class="text-[10px] font-bold text-primary tracking-widest uppercase">AI Engine Online</span>
+</div>
+<h1 class="text-5xl md:text-6xl font-extrabold tracking-tighter text-on-surface font-headline leading-tight">
+                        AI 视频生成工作流
+                    </h1>
+<p class="text-xl text-on-surface-variant max-w-2xl font-light leading-relaxed">
+                        输入故事主题，自动生成完整视频。我们融合了尖端的扩散模型与神经语音合成技术，为您打造电影级的视觉叙事。
+                    </p>
+</section>
+<!-- Error/Status Alert -->
+<div class="p-4 bg-error-container/20 border border-error/20 rounded-xl flex items-center gap-4" id="status-alert" style="display: none;">
+<span class="material-symbols-outlined text-error" style="font-variation-settings: 'FILL' 1;" id="status-alert-icon">error</span>
+<div class="flex-1">
+<p class="text-sm font-semibold text-error" id="status-alert-title">系统提示</p>
+<p class="text-xs text-error/80" id="status-alert-message">检测到当前服务器负载较高，生成脚本可能需要更长时间，请耐心等待。</p>
+</div>
+<span class="material-symbols-outlined text-error/40 cursor-pointer hover:text-error" onclick="document.getElementById('status-alert').style.display='none'">close</span>
+</div>
+
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+<!-- Left: Form Card -->
+<div class="lg:col-span-5 space-y-6">
+<div class="surface-container-low rounded-xl p-6 shadow-2xl border border-outline-variant/10 relative overflow-hidden group">
+<div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<div class="space-y-6">
+<div class="space-y-2">
+<label class="text-[10px] font-bold text-primary tracking-widest uppercase ml-1">故事主题输入</label>
+<textarea class="w-full h-48 bg-surface-container-lowest border-none rounded-xl p-4 text-sm text-on-surface placeholder:text-on-surface-variant/30 focus:ring-2 focus:ring-primary/20 resize-none custom-scrollbar" id="story-theme" placeholder="例如：愚公移山，讲述愚公带领子孙挖山开路，最终感动天帝派出神仙搬走大山的励志故事"></textarea>
+</div>
+<div class="grid grid-cols-1 gap-4">
+<div class="space-y-2">
+<label class="text-[10px] font-bold text-primary tracking-widest uppercase ml-1">视频风格</label>
+<div class="relative">
+<select class="w-full bg-surface-container-lowest border-none rounded-lg p-3 text-sm text-on-surface appearance-none focus:ring-2 focus:ring-primary/20" id="video-style">
+<option value="3D卡通">3D卡通</option>
+<option value="水墨风">水墨风</option>
+<option value="写实">写实</option>
+<option value="动漫">动漫</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant">expand_more</span>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="space-y-2">
+<label class="text-[10px] font-bold text-primary tracking-widest uppercase ml-1">配音音色</label>
+<div class="relative">
+<select class="w-full bg-surface-container-lowest border-none rounded-lg p-3 text-sm text-on-surface appearance-none focus:ring-2 focus:ring-primary/20" id="voice-selection">
+<option value="温柔女声">温柔女声</option>
+<option value="浑厚男声">浑厚男声</option>
+<option value="童声">童声</option>
+<option value="活力女声">活力女声</option>
+<option value="磁性男声">磁性男声</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant">expand_more</span>
+</div>
+</div>
+<div class="space-y-2">
+<label class="text-[10px] font-bold text-primary tracking-widest uppercase ml-1">背景音乐</label>
+<div class="relative">
+<select class="w-full bg-surface-container-lowest border-none rounded-lg p-3 text-sm text-on-surface appearance-none focus:ring-2 focus:ring-primary/20" id="bgm-selection">
+<option value="励志">励志</option>
+<option value="温馨">温馨</option>
+<option value="磅礴">磅礴</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant">expand_more</span>
+</div>
+</div>
+</div>
+</div>
+<div class="pt-4">
+<button class="w-full py-4 bg-gradient-to-r from-primary to-primary-container text-on-primary font-bold rounded-xl shadow-[0_0_20px_rgba(192,193,255,0.3)] hover:shadow-[0_0_30px_rgba(192,193,255,0.5)] transition-all flex items-center justify-center gap-2 group" id="generate-btn" onclick="generateVideo()">
+<span class="material-symbols-outlined text-xl group-hover:rotate-12 transition-transform">movie_edit</span>
+                                        生成视频
+                                    </button>
+</div>
+</div>
+<!-- Progress Area -->
+<div class="surface-container-low rounded-xl p-6 border border-outline-variant/10 space-y-4" id="workflow-status-container">
+<h3 class="text-xs font-bold text-on-surface/50 tracking-widest uppercase">工作流状态</h3>
+<div class="space-y-4" id="workflow-steps">
+<div class="flex items-center justify-between p-3 rounded-lg bg-surface-container-lowest opacity-40" id="step-script">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-on-surface-variant text-sm">radio_button_unchecked</span>
+<span class="text-sm font-medium">脚本生成</span>
+</div>
+<span class="text-[10px] text-on-surface-variant font-bold">Pending</span>
+</div>
+<div class="flex items-center justify-between p-3 rounded-lg bg-surface-container-lowest opacity-40" id="step-character">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-on-surface-variant text-sm">radio_button_unchecked</span>
+<span class="text-sm font-medium">角色生成</span>
+</div>
+<span class="text-[10px] text-on-surface-variant font-bold">Pending</span>
+</div>
+<div class="flex items-center justify-between p-3 rounded-lg bg-surface-container-lowest opacity-40" id="step-shots">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-on-surface-variant text-sm">radio_button_unchecked</span>
+<span class="text-sm font-medium">分镜绘制</span>
+</div>
+<span class="text-[10px] text-on-surface-variant font-bold">Pending</span>
+</div>
+<div class="flex items-center justify-between p-3 rounded-lg bg-surface-container-lowest opacity-40" id="step-media">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-on-surface-variant text-sm">radio_button_unchecked</span>
+<span class="text-sm font-medium">音视频合成</span>
+</div>
+<span class="text-[10px] text-on-surface-variant font-bold">Pending</span>
+</div>
+<div class="flex items-center justify-between p-3 rounded-lg bg-surface-container-lowest opacity-40" id="step-final">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-on-surface-variant text-sm">radio_button_unchecked</span>
+<span class="text-sm font-medium">最终合成</span>
+</div>
+<span class="text-[10px] text-on-surface-variant font-bold">Pending</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Right: Preview Area -->
+<div class="lg:col-span-7 space-y-6">
+<div class="glass-panel rounded-xl aspect-video relative flex items-center justify-center border border-outline-variant/10 overflow-hidden shadow-2xl" id="video-preview-container">
+<div class="absolute inset-0 w-full h-full flex items-center justify-center" id="video-placeholder">
+<div class="w-20 h-20 rounded-full glass-panel flex items-center justify-center border border-primary/30 group cursor-pointer hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-4xl text-primary" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</div>
+</div>
+<video id="video-player" class="absolute inset-0 w-full h-full object-cover" style="display: none;" controls></video>
+<div class="absolute bottom-0 left-0 w-full h-1 bg-surface-container-highest" id="video-progress-bar" style="display: none;">
+<div class="h-full bg-primary shadow-[0_0_10px_#c0c1ff]" id="video-progress" style="width: 0%;"></div>
+</div>
+</div>
+<!-- Info Bento Grid -->
+<div class="grid grid-cols-2 gap-4" id="video-info" style="display: none;">
+<div class="surface-container-low p-4 rounded-xl border border-outline-variant/10 space-y-2">
+<span class="material-symbols-outlined text-tertiary">high_quality</span>
+<p class="text-xs font-bold text-on-surface-variant/60 uppercase">输出质量</p>
+<p class="text-xl font-bold" id="output-quality">4K Ultra HD</p>
+</div>
+<div class="surface-container-low p-4 rounded-xl border border-outline-variant/10 space-y-2">
+<span class="material-symbols-outlined text-secondary">timer</span>
+<p class="text-xs font-bold text-on-surface-variant/60 uppercase">渲染状态</p>
+<p class="text-xl font-bold" id="render-status">完成</p>
+</div>
+</div>
+<!-- Prompt Bar -->
+<div class="ai-glow-border p-1 rounded-xl bg-surface-container-low mt-4">
+<div class="flex items-center gap-4 bg-surface-container-lowest px-4 py-3 rounded-lg border border-outline-variant/5">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+<input class="flex-1 bg-transparent border-none text-sm focus:ring-0 text-on-surface" placeholder="向 AI 提出修改建议，例如：'把水墨风格的颜色调深一点'..." type="text"/>
+<button class="px-4 py-1.5 bg-primary/10 text-primary text-[10px] font-bold uppercase rounded-lg border border-primary/20 hover:bg-primary/20 transition-all">发送</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer Meta -->
+<footer class="mt-auto py-8 px-8 border-t border-outline-variant/10 flex flex-col md:flex-row justify-between items-center gap-4 opacity-50">
+<div class="text-[10px] uppercase tracking-widest font-bold">© 2024 NEURAL SLATE 企业版</div>
+<div class="flex gap-6 text-[10px] uppercase tracking-widest font-bold">
+<a class="hover:text-primary transition-colors" href="#">隐私政策</a>
+<a class="hover:text-primary transition-colors" href="#">文档中心</a>
+<a class="hover:text-primary transition-colors" href="#">API 状态</a>
+</div>
+</footer>
+</main>
+</div>
+<script>
+const API_BASE = window.location.origin;
+
+function updateStep(stepId, status, percent) {
+    const step = document.getElementById(stepId);
+    if (!step) return;
+
+    if (status === 'running') {
+        step.classList.remove('opacity-40', 'bg-surface-container-lowest');
+        step.classList.add('bg-surface-container-highest/40', 'border', 'border-primary/20');
+        step.querySelector('.material-symbols-outlined').textContent = 'refresh';
+        step.querySelector('.material-symbols-outlined').classList.add('animate-spin', 'text-primary');
+        step.querySelector('.text-sm.font-medium').classList.add('text-primary');
+        step.querySelector('.text-sm.font-medium').classList.remove('text-on-surface');
+        step.querySelector('.text-\\[10px\\]').classList.add('text-primary');
+        step.querySelector('.text-\\[10px\\]').classList.remove('text-on-surface-variant');
+        step.querySelector('.text-\\[10px\\]').textContent = percent + '%';
+    } else if (status === 'done') {
+        step.classList.remove('opacity-40', 'bg-surface-container-highest/40', 'border', 'border-primary/20');
+        step.classList.add('bg-surface-container-lowest');
+        step.querySelector('.material-symbols-outlined').textContent = 'check_circle';
+        step.querySelector('.material-symbols-outlined').classList.remove('animate-spin', 'text-primary');
+        step.querySelector('.material-symbols-outlined').classList.add('text-secondary');
+        step.querySelector('.text-sm.font-medium').classList.remove('text-primary');
+        step.querySelector('.text-sm.font-medium').classList.add('text-on-surface');
+        step.querySelector('.text-\\[10px\\]').classList.remove('text-primary');
+        step.querySelector('.text-\\[10px\\]').classList.add('text-secondary');
+        step.querySelector('.text-\\[10px\\]').textContent = '100%';
+    }
+}
+
+function showAlert(type, title, message) {
+    const alert = document.getElementById('status-alert');
+    const icon = document.getElementById('status-alert-icon');
+    const titleEl = document.getElementById('status-alert-title');
+    const msgEl = document.getElementById('status-alert-message');
+
+    alert.style.display = 'flex';
+
+    if (type === 'error') {
+        alert.className = 'p-4 bg-error-container/20 border border-error/20 rounded-xl flex items-center gap-4';
+        icon.textContent = 'error';
+        icon.className = 'material-symbols-outlined text-error';
+        titleEl.className = 'text-sm font-semibold text-error';
+        msgEl.className = 'text-xs text-error/80';
+    } else if (type === 'success') {
+        alert.className = 'p-4 bg-green-500/20 border border-green-500/20 rounded-xl flex items-center gap-4';
+        icon.textContent = 'check_circle';
+        icon.className = 'material-symbols-outlined text-green-500';
+        titleEl.className = 'text-sm font-semibold text-green-500';
+        msgEl.className = 'text-xs text-green-500/80';
+    } else {
+        alert.className = 'p-4 bg-primary-container/20 border border-primary/20 rounded-xl flex items-center gap-4';
+        icon.textContent = 'info';
+        icon.className = 'material-symbols-outlined text-primary';
+        titleEl.className = 'text-sm font-semibold text-primary';
+        msgEl.className = 'text-xs text-primary/80';
+    }
+
+    titleEl.textContent = title;
+    msgEl.textContent = message;
+}
+
+function resetForm() {
+    document.getElementById('story-theme').value = '';
+    document.getElementById('video-style').value = '3D卡通';
+    document.getElementById('voice-selection').value = '温柔女声';
+    document.getElementById('bgm-selection').value = '励志';
+
+    // Reset steps
+    ['step-script', 'step-character', 'step-shots', 'step-media', 'step-final'].forEach(id => {
+        const step = document.getElementById(id);
+        if (step) {
+            step.classList.add('opacity-40', 'bg-surface-container-lowest');
+            step.classList.remove('bg-surface-container-highest/40', 'border', 'border-primary/20');
+            const icon = step.querySelector('.material-symbols-outlined');
+            icon.textContent = 'radio_button_unchecked';
+            icon.classList.remove('animate-spin', 'text-primary', 'text-secondary');
+            icon.classList.add('text-on-surface-variant');
+            step.querySelector('.text-sm.font-medium').classList.remove('text-primary');
+            step.querySelector('.text-sm.font-medium').classList.add('text-on-surface');
+            step.querySelector('.text-\\[10px\\]').classList.remove('text-primary', 'text-secondary');
+            step.querySelector('.text-\\[10px\\]').classList.add('text-on-surface-variant');
+            step.querySelector('.text-\\[10px\\]').textContent = 'Pending';
+        }
+    });
+
+    // Reset video preview
+    document.getElementById('video-placeholder').style.display = 'flex';
+    document.getElementById('video-player').style.display = 'none';
+    document.getElementById('video-player').src = '';
+    document.getElementById('video-progress-bar').style.display = 'none';
+    document.getElementById('video-info').style.display = 'none';
+    document.getElementById('status-alert').style.display = 'none';
+}
+
+async function generateVideo() {
+    const btn = document.getElementById('generate-btn');
+    const originalContent = btn.innerHTML;
+
+    const data = {
+        story_theme: document.getElementById('story-theme').value,
+        video_style: document.getElementById('video-style').value,
+        voice: document.getElementById('voice-selection').value,
+        bgm: document.getElementById('bgm-selection').value
+    };
+
+    if (!data.story_theme.trim()) {
+        showAlert('error', '输入错误', '请输入故事主题');
+        return;
+    }
+
+    // Reset steps
+    ['step-script', 'step-character', 'step-shots', 'step-media', 'step-final'].forEach(id => {
+        const step = document.getElementById(id);
+        if (step) {
+            step.classList.add('opacity-40', 'bg-surface-container-lowest');
+            step.classList.remove('bg-surface-container-highest/40', 'border', 'border-primary/20');
+            const icon = step.querySelector('.material-symbols-outlined');
+            icon.textContent = 'radio_button_unchecked';
+            icon.classList.remove('animate-spin', 'text-primary', 'text-secondary');
+            icon.classList.add('text-on-surface-variant');
+            step.querySelector('.text-sm.font-medium').classList.remove('text-primary');
+            step.querySelector('.text-sm.font-medium').classList.add('text-on-surface');
+            step.querySelector('.text-\\[10px\\]').classList.remove('text-primary', 'text-secondary');
+            step.querySelector('.text-\\[10px\\]').classList.add('text-on-surface-variant');
+            step.querySelector('.text-\\[10px\\]').textContent = 'Pending';
+        }
+    });
+
+    // Start workflow
+    updateStep('step-script', 'running', 10);
+
+    btn.disabled = true;
+    btn.classList.add('opacity-70', 'cursor-not-allowed');
+    btn.innerHTML = `<span class="material-symbols-outlined animate-spin">sync</span> 生成中...`;
+
+    try {
+        const response = await fetch(`${API_BASE}/api/generate`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+            // All steps done
+            updateStep('step-script', 'done', 100);
+            updateStep('step-character', 'done', 100);
+            updateStep('step-shots', 'done', 100);
+            updateStep('step-media', 'done', 100);
+            updateStep('step-final', 'done', 100);
+
+            showAlert('success', '生成成功', result.message || '视频生成完成');
+
+            // Show video preview
+            if (result.final_video_path) {
+                const filename = result.final_video_path.split('/').pop();
+                const videoUrl = `${API_BASE}/api/video/${filename}`;
+
+                document.getElementById('video-placeholder').style.display = 'none';
+                document.getElementById('video-player').src = videoUrl;
+                document.getElementById('video-player').style.display = 'block';
+                document.getElementById('video-progress-bar').style.display = 'block';
+                document.getElementById('video-info').style.display = 'grid';
+                document.getElementById('render-status').textContent = '完成';
+            }
+        } else {
+            // Show errors
+            if (result.errors && result.errors.length > 0) {
+                showAlert('error', '生成失败', result.errors.join('; '));
+            } else {
+                showAlert('error', '生成失败', result.message || '未知错误');
+            }
+
+            // Mark failed step
+            updateStep('step-script', 'done', 100);
+            updateStep('step-character', 'done', 100);
+            updateStep('step-shots', 'done', 100);
+            updateStep('step-media', 'done', 100);
+            updateStep('step-final', 'done', 100);
+        }
+
+    } catch (error) {
+        console.error('Error:', error);
+        showAlert('error', '网络错误', '无法连接到服务器，请检查网络连接');
+
+        // Reset all steps
+        ['step-script', 'step-character', 'step-shots', 'step-media', 'step-final'].forEach(id => {
+            const step = document.getElementById(id);
+            if (step) {
+                step.classList.add('opacity-40', 'bg-surface-container-lowest');
+                step.classList.remove('bg-surface-container-highest/40', 'border', 'border-primary/20');
+                const icon = step.querySelector('.material-symbols-outlined');
+                icon.textContent = 'error';
+                icon.classList.remove('animate-spin', 'text-primary', 'text-secondary');
+                icon.classList.add('text-error');
+            }
+        });
+    } finally {
+        btn.disabled = false;
+        btn.classList.remove('opacity-70', 'cursor-not-allowed');
+        btn.innerHTML = originalContent;
+    }
+}
+
+// Simulate progress for demo (remove in production)
+function simulateProgress() {
+    let step = 0;
+    const steps = ['step-script', 'step-character', 'step-shots', 'step-media', 'step-final'];
+
+    const interval = setInterval(() => {
+        if (step < steps.length) {
+            updateStep(steps[step], 'running', 50 + Math.random() * 50);
+            setTimeout(() => {
+                updateStep(steps[step], 'done', 100);
+            }, 1000);
+            step++;
+        } else {
+            clearInterval(interval);
+        }
+    }, 2000);
+}
+</script>
+</body></html>
